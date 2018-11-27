@@ -1,0 +1,73 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="username" placeHolder="请输入用心名">
+          <!-- <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              Please input your username!
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').hasError('duplicated')">
+              The username is redundant!
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').pending">
+              Validating...
+            </ng-container>
+          </nz-form-explain> -->
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>姓名</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="realname">
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>密码</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="password">
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>头像</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="avatar">
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>电话</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="phone">
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>邮箱</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input formControlName="email">
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>姓别</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select formControlName="sex" >
+              <nz-option *ngFor="let t of sex" [nzLabel]="t.name" [nzValue]="t.value"></nz-option>
+          </nz-select>
+      </nz-form-control>
+    </div>
+    <div nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>状态</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+        <nz-select formControlName="locked" >
+            <nz-option *ngFor="let t of status" [nzLabel]="t.name" [nzValue]="t.value"></nz-option>
+        </nz-select>
+        </nz-form-control>
+      </div>
+    
+    <div nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+          <button nz-button (click)="goBack($event)">返回</button>
+        </nz-form-control>
+    </div> 
+  </form>

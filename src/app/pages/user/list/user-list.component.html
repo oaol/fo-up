@@ -1,0 +1,67 @@
+<div class="hsh-button-list">
+  <nz-input-group nzSearch [nzSuffix]="suffixIconSearch"  style="width: 180px;" >
+    <input type="text" nz-input placeholder="input search text" [(ngModel)]="searchValue" >
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon type="search"></i></button>
+  </ng-template>
+  <br/>
+  <br/>
+  <!-- <button *ngxPermissionsOnly="['up:permission:create']" nz-button [nzType]="'primary'" routerLink="{{createPath}}"> -->
+  <button  nz-button [nzType]="'primary'" routerLink="{{createPath}}">
+    <i class="anticon anticon-user-add"></i><span>新增用户</span>
+  </button>
+  &nbsp;&nbsp;
+  <button  nz-button [nzType]="'primary'" routerLink="{{createPath}}">
+    <i class="anticon anticon-user-add"></i><span>添加用户权限</span>
+  </button>
+</div>
+
+
+  <nz-table
+  #ajaxTable
+  nzShowSizeChanger
+  [nzFrontPagination]="false"
+  [nzData]="page.content"
+  [nzLoading]="_loading"
+  [nzTotal]="page.totalElements"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  (nzPageIndexChange)="search()"
+  (nzPageSizeChange)="search(true)">
+  <thead >
+    <tr>
+      <th><span>用户名</span></th>
+      <th ><span>姓名</span></th>
+      <th ><span>头像</span></th>
+      <th ><span>电话</span></th>
+      <th ><span>邮箱</span></th>
+      <th ><span>性别</span></th>
+      <th ><span>状态</span></th>
+      <th ><span>创建时间</span></th>
+      <th ><span>操作</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of ajaxTable.data">
+      <td>{{data.username}}</td>
+      <td >{{data.realname}}</td>
+      <td >{{data.avatar}}</td>
+      <td >{{data.phone}}</td>
+      <td >{{data.email}}</td>
+      <td >{{data.sex}}</td>
+      <td >{{data.locked}}</td>
+      <td >{{data.ctime}}</td>
+      <td>
+          <!-- <nz-divider nzType="vertical"></nz-divider> -->
+        <nz-popconfirm [nzTitle]="'确定要删除这条数据吗？'" (nzOnConfirm)="confirm(data.userId)" (nzOnCancel)="cancel('info', '已取消删除！')">
+          <a nz-popconfirm>删除</a>
+        </nz-popconfirm>
+        <nz-divider nzType="vertical"></nz-divider>
+        <span>
+            <a [routerLink]="['/user/template/update', data.userId]">编辑</a>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
